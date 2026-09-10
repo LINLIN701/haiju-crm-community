@@ -54,13 +54,13 @@ docker compose up -d --build
 
 ## 开源与品牌
 
-- 社区代码计划采用 `AGPL-3.0-or-later`。
+- 社区代码采用 `AGPL-3.0-or-later`。
 - “妙海聚”“海聚客户管理系统”名称、图形和字标不随代码许可证授权。
 - 修改版应使用自己的名称和视觉，或事先取得妙海聚书面授权。
 
 ## 商业合作
 
-需要专业版、企业版、独立部署、数据迁移或实施支持，可前往[妙海聚官网](https://haiju-customer-management.lichenglin-leon.chatgpt.site)申请演示或付费试点。
+需要专业版、企业版、独立部署、数据迁移或实施支持，可通过[商业合作表单](https://github.com/LINLIN701/haiju-crm-community/issues/new?template=commercial-inquiry.yml)申请演示或付费试点。
 
 社区问题、功能建议和商业合作入口见 [SUPPORT.md](SUPPORT.md)。安全漏洞请按 [SECURITY.md](SECURITY.md) 私密报告。
 

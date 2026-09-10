@@ -69,7 +69,12 @@ finally {
 
 Push-Location $backend
 try {
-    .\mvnw.cmd test
+    if ([System.Environment]::OSVersion.Platform -eq [System.PlatformID]::Win32NT) {
+        .\mvnw.cmd test
+    }
+    else {
+        sh ./mvnw test
+    }
     if ($LASTEXITCODE -ne 0) { throw "社区后端测试失败" }
 }
 finally {

@@ -32,7 +32,7 @@ jobs:
           cache: maven
       - name: 后端测试
         working-directory: backend
-        run: ./mvnw --batch-mode test
+        run: sh ./mvnw --batch-mode test
 
   compose:
     runs-on: ubuntu-latest
@@ -41,4 +41,3 @@ jobs:
       - name: MySQL 8.4 空库迁移与 Compose 冒烟测试
         shell: pwsh
         run: ./scripts/verify-community-compose.ps1
-
