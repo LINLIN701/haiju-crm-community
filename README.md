@@ -39,7 +39,7 @@ docker compose up -d --build
 
 ## 独立验证
 
-在 Windows PowerShell 或跨平台 PowerShell 7 中运行：
+使用 PowerShell 7，并准备 Node.js 22、Java 17、ripgrep（`rg`）和 Docker Compose 后运行：
 
 ```powershell
 .\scripts\verify-community-source.ps1
