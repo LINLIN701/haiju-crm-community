@@ -4,6 +4,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+Get-Command rg -ErrorAction Stop | Out-Null
 
 if (-not $RepositoryRoot) {
     $candidate = Split-Path -Parent $PSScriptRoot
@@ -39,8 +40,18 @@ function Find-TextFiles {
     foreach ($glob in $excludedGlobs) {
         $arguments += @("-g", $glob)
     }
-    $arguments += @($Pattern, "--", $RepositoryRoot)
-    return @(rg @arguments 2>$null)
+    $arguments += @("-e", $Pattern, "--", ".")
+    Push-Location $RepositoryRoot
+    try {
+        $hits = @(rg @arguments 2>$null)
+        if ($LASTEXITCODE -gt 1) {
+            throw "公开仓库文本扫描执行失败，不能将扫描错误视为无命中。"
+        }
+        return $hits
+    }
+    finally {
+        Pop-Location
+    }
 }
 
 $proprietaryTerms = "货宝宝|淘淘乐园|乐淘|淘淘沙龙|沙龙主理人|城市主理人|社区主理人"

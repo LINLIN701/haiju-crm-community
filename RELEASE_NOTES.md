@@ -19,3 +19,9 @@
 
 完整的社区/商业边界见 [COMMERCIAL_EDITIONS.md](COMMERCIAL_EDITIONS.md)，升级前请阅读 [SECURITY.md](SECURITY.md)。
 
+## 验证与限制
+
+- 前端生产构建、依赖审计和后端 4 项自动化测试通过。
+- 临时 MySQL 8.4 空库迁移与 Docker Compose 实际 HTTP 验证通过。
+- AI 未配置时明确失败已验证；本次发布未使用付费外部模型执行真实解析抽样。
+- 容器基础镜像已核对版本及许可证，完整镜像 CVE 扫描尚未完成。

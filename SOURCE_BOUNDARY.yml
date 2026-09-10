@@ -3,7 +3,8 @@ display_name: 海聚客户管理系统社区版
 company_brand: 妙海聚
 version: V1.00.01
 license: AGPL-3.0-or-later
-publication_status: release_candidate_approved_awaiting_github_push
+publication_status: source_published
+published_at: 2026-09-11
 
 included_capabilities:
   - customer_profiles
@@ -36,12 +37,10 @@ required_release_checks:
 
 current_evidence:
   physical_source_split: complete
-  independent_frontend: community-app/frontend
-  independent_backend: community-app/backend
+  independent_frontend: frontend
+  independent_backend: backend
   shared_closed_source_imports: forbidden
-  public_repository: target_github_com_LINLIN701_haiju_crm_community
+  public_repository: https://github.com/LINLIN701/haiju-crm-community
   public_support_receiver: github_issue_forms
   private_security_receiver: github_private_vulnerability_reporting
-  website_access: owner_only
-  remaining_blockers:
-    - github_authentication_and_push
+  remaining_blockers: []

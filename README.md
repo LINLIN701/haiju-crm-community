@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/LINLIN701/haiju-crm-community/actions/workflows/ci.yml/badge.svg)](https://github.com/LINLIN701/haiju-crm-community/actions/workflows/ci.yml)
 
-> V1.00.01 已完成物理拆分、独立构建、MySQL 8.4/Docker 实测、依赖许可证复核、公开支持入口和管理员发布批准。当前内容是等待推送到 `LINLIN701/haiju-crm-community` 的无历史发布候选。
+> 社区源码已于 2026-09-11 公开到 `LINLIN701/haiju-crm-community`，包含独立部署所需的前端、后端、数据库迁移和 Docker Compose 配置。版本与下载以 [Releases](https://github.com/LINLIN701/haiju-crm-community/releases) 为准。
 
 ## 社区版适合谁
 

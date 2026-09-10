@@ -36,23 +36,7 @@ if ($commercialHits.Count -gt 0) {
     throw "社区源码仍包含商业模块代码标识：$($commercialHits -join ', ')"
 }
 
-$secretPatterns = @(
-    "AKIA[0-9A-Z]{16}",
-    "gh[pousr]_[A-Za-z0-9_]{30,}",
-    "-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----"
-)
-$secretHits = @()
-foreach ($pattern in $secretPatterns) {
-    $secretHits += @(rg -l --hidden -g '!node_modules/**' -g '!dist/**' -g '!target/**' $pattern -- $appRoot 2>$null)
-}
-
 & (Join-Path $PSScriptRoot "audit-public-repository.ps1")
-if ($LASTEXITCODE -ne 0) {
-    throw "公开仓库边界审计失败。"
-}
-if ($secretHits.Count -gt 0) {
-    throw "社区源码疑似包含高置信度凭据文件。"
-}
 
 Push-Location $frontend
 try {

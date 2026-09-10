@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: 公开源码边界与敏感文件审计
+        shell: pwsh
+        run: ./scripts/audit-public-repository.ps1
       - uses: actions/setup-node@v4
         with:
           node-version: 22
