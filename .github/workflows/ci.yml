@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: 前端构建与生产依赖审计
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+          npm run audit:prod
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: 后端测试
+        working-directory: backend
+        run: ./mvnw --batch-mode test
+
+  compose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: MySQL 8.4 空库迁移与 Compose 冒烟测试
+        shell: pwsh
+        run: ./scripts/verify-community-compose.ps1
+

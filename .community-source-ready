@@ -1,0 +1,20 @@
+status: publication-ready
+version: V1.00.01
+verified_at: 2026-09-11
+evidence:
+  independent_frontend_build: passed
+  frontend_modules: 36
+  frontend_production_vulnerabilities: 0
+  independent_backend_tests: 4/4
+  h2_mysql_mode_flyway_migrations: 1/1
+  original_organization_terms: 0
+  commercial_code_identifiers: 0
+  parent_source_imports: 0
+  high_confidence_secrets: 0
+  mysql_8_4_clean_migration: 1/1
+  compose_frontend_health_auth_dashboard_ai_failure: passed
+  frontend_locked_packages_license_reviewed: 118
+  backend_resolved_dependencies_license_reviewed: 83
+  public_support_receiver: github_issue_forms
+  administrator_publication_approval: granted_2026_09_11
+remaining_release_blockers: []

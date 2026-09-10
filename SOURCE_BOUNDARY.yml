@@ -1,0 +1,47 @@
+project: haiju-crm-community
+display_name: 海聚客户管理系统社区版
+company_brand: 妙海聚
+version: V1.00.01
+license: AGPL-3.0-or-later
+publication_status: release_candidate_approved_awaiting_github_push
+
+included_capabilities:
+  - customer_profiles
+  - customer_tags_and_search
+  - customer_import_export
+  - basic_contact_records_and_plans
+  - basic_consumption_records
+  - manual_ai_text_parse_with_user_model_key
+  - basic_notifications_and_operation_logs
+
+excluded_capabilities:
+  - membership_commercial_workflows
+  - performance_chains
+  - multi_store_team_execution
+  - smart_daily_summaries
+  - automated_ai_follow_up_and_retrospective
+  - ai_operations_and_quality_center
+  - third_party_connectors
+  - commercial_hosting_and_support_tooling
+
+required_release_checks:
+  - clean_history_free_export
+  - independent_frontend_build
+  - independent_backend_tests
+  - clean_database_migration
+  - secret_and_personal_data_scan
+  - dependency_license_review
+  - trademark_asset_replacement_check
+  - manual_release_approval
+
+current_evidence:
+  physical_source_split: complete
+  independent_frontend: community-app/frontend
+  independent_backend: community-app/backend
+  shared_closed_source_imports: forbidden
+  public_repository: target_github_com_LINLIN701_haiju_crm_community
+  public_support_receiver: github_issue_forms
+  private_security_receiver: github_private_vulnerability_reporting
+  website_access: owner_only
+  remaining_blockers:
+    - github_authentication_and_push

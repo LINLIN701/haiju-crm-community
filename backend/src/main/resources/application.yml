@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: haiju-crm-community
+  datasource:
+    url: ${APP_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/haiju_community?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${APP_DATASOURCE_USERNAME:haiju}
+    password: ${APP_DATASOURCE_PASSWORD:}
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+server:
+  port: ${APP_PORT:8080}
+
+app:
+  admin:
+    username: ${APP_ADMIN_USERNAME:admin}
+    password: ${APP_ADMIN_PASSWORD:}
+  cors:
+    allowed-origin: ${APP_CORS_ALLOWED_ORIGIN:http://localhost:5173}
+  ai:
+    base-url: ${APP_AI_BASE_URL:}
+    api-key: ${APP_AI_API_KEY:}
+    model: ${APP_AI_MODEL:}
+
+logging:
+  level:
+    root: INFO
