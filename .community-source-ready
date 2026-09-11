@@ -1,5 +1,5 @@
 status: publication-ready
-version: V1.00.01
+version: V1.00.02
 verified_at: 2026-09-11
 evidence:
   independent_frontend_build: passed

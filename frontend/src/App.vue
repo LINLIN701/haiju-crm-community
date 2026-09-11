@@ -18,7 +18,7 @@ function logout() {
     <header class="topbar">
       <RouterLink class="brand" to="/dashboard">
         <span class="brand-mark">海</span>
-        <span><strong>海聚客户管理系统</strong><small>社区版 V1.00.01</small></span>
+        <span><strong>海聚客户管理系统</strong><small>社区版 V1.00.02</small></span>
       </RouterLink>
       <button v-if="loggedIn" class="text-button" type="button" @click="logout">退出</button>
     </header>

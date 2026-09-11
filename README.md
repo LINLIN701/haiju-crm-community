@@ -4,6 +4,10 @@
 
 [![CI](https://github.com/LINLIN701/haiju-crm-community/actions/workflows/ci.yml/badge.svg)](https://github.com/LINLIN701/haiju-crm-community/actions/workflows/ci.yml)
 
+**第一次使用：** [部署教程](docs/DEPLOYMENT.md) · [带截图的使用教程](docs/USER_GUIDE.md) · [练习CSV](docs/examples/customers-sample.csv)
+
+当前版本 **V1.00.02**。本次补齐教程、真实截图和版本标识，业务功能与V1.00.01相同。
+
 > 社区源码已于 2026-09-11 公开到 `LINLIN701/haiju-crm-community`，包含独立部署所需的前端、后端、数据库迁移和 Docker Compose 配置。版本与下载以 [Releases](https://github.com/LINLIN701/haiju-crm-community/releases) 为准。
 
 ## 社区版适合谁
@@ -30,10 +34,12 @@
 3. 在安装了 Docker Compose 的机器执行：
 
 ```bash
-docker compose up -d --build
+docker compose -p haiju up -d --build
 ```
 
 4. 打开 `http://localhost:8088`，使用 `.env` 中的管理员账号和密码登录。
+
+以上用于全新安装；已有部署必须沿用原Compose项目名，避免指向另一套数据卷。首次部署、升级和备份请完整阅读[部署教程](docs/DEPLOYMENT.md)。
 
 生产环境必须配置 HTTPS 反向代理。HTTP Basic 只能在 HTTPS 或可信本机网络中使用。社区数据库必须是全新独立数据库，不得指向其他业务系统的生产库。
 
