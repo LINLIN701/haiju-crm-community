@@ -27,6 +27,9 @@ $env:MYSQL_ROOT_PASSWORD = "$(New-Guid)Bb2!"
 $env:APP_ADMIN_USERNAME = "releasecheck"
 $env:APP_ADMIN_PASSWORD = "$(New-Guid)Cc3!"
 $env:APP_CORS_ALLOWED_ORIGIN = "http://localhost:8088"
+$env:APP_AI_BASE_URL = ""
+$env:APP_AI_API_KEY = ""
+$env:APP_AI_MODEL = ""
 
 function Invoke-CommunityRequest {
     param(
@@ -104,10 +107,23 @@ try {
         throw "AI 未配置失败语义验收失败：HTTP $($ai.StatusCode)"
     }
 
+    $created = Invoke-CommunityRequest -Uri 'http://localhost:8088/api/v1/customers' -Method POST -Headers $authHeaders `
+        -Body '{"name":"银行服务联系人（虚构）","relationship":{"industry":"银行","entityType":"个人","organization":"示例机构","relationshipType":"客户","stage":"需求沟通","needs":"约定下一次服务回访"}}'
+    if ($created.StatusCode -ne 200) { throw '多行业客户保存失败' }
+    $customer = ($created.Content | ConvertFrom-Json).data
+    $readBack = Invoke-CommunityRequest -Uri "http://localhost:8088/api/v1/customers/$($customer.id)" -Headers $authHeaders
+    if (($readBack.Content | ConvertFrom-Json).data.relationship.needs -ne '约定下一次服务回访') { throw '关系资料落库回显失败' }
+    $filtered = Invoke-CommunityRequest -Uri ('http://localhost:8088/api/v1/customers?industry=' + [Uri]::EscapeDataString('银行')) -Headers $authHeaders
+    if (@(($filtered.Content | ConvertFrom-Json).data).Count -ne 1) { throw '行业筛选失败' }
+    $exported = Invoke-CommunityRequest -Uri 'http://localhost:8088/api/v1/customers/export' -Headers $authHeaders
+    if ($exported.Content -notmatch '关注事项' -or $exported.Content -notmatch '示例机构') { throw '关系字段CSV导出失败' }
+    $logs = Invoke-CommunityRequest -Uri 'http://localhost:8088/api/v1/operation-logs' -Headers $authHeaders
+    if (($logs.Content | ConvertFrom-Json).data[0].actionLabel -ne '新增客户') { throw '中文审计日志失败' }
+
     $migrationCount = docker compose -p $projectName exec -T `
         -e "MYSQL_PWD=$($env:MYSQL_ROOT_PASSWORD)" `
         mysql mysql -uroot -Nse "SELECT COUNT(*) FROM haiju_community_release_check.flyway_schema_history WHERE success = 1;"
-    if ($LASTEXITCODE -ne 0 -or [int]$migrationCount -lt 1) {
+    if ($LASTEXITCODE -ne 0 -or [int]$migrationCount -ne 2) {
         throw "MySQL 8.4 Flyway 空库迁移验收失败。"
     }
 
@@ -119,6 +135,7 @@ try {
     Write-Host "- 管理员看板：HTTP $($dashboard.StatusCode)"
     Write-Host "- AI 未配置：HTTP $($ai.StatusCode)，明确失败"
     Write-Host "- MySQL 8.4 Flyway 成功迁移：$migrationCount"
+    Write-Host '- 多行业保存/回显/筛选/CSV/中文日志：真实接口通过'
 }
 finally {
     docker compose -p $projectName down -v --remove-orphans

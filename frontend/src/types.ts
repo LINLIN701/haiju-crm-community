@@ -13,9 +13,21 @@ export interface Customer {
   notes: string | null
   createdAt: string
   updatedAt: string
+  relationship: RelationshipProfile
 }
 
-export type CustomerDraft = Pick<Customer, 'name' | 'phone' | 'wechat' | 'tags' | 'notes'>
+export interface RelationshipProfile {
+  entityType: string
+  industry: string
+  organization: string | null
+  jobTitle: string | null
+  email: string | null
+  relationshipType: string
+  stage: string
+  needs: string | null
+}
+
+export type CustomerDraft = Pick<Customer, 'name' | 'phone' | 'wechat' | 'tags' | 'notes' | 'relationship'>
 
 export interface ContactRecord {
   id: number
@@ -41,6 +53,7 @@ export interface Overview {
   customerCount: number
   dueFollowUps: number
   totalConsumption: number
+  plannedFollowUps: number
 }
 
 export interface Reminder {
@@ -53,6 +66,8 @@ export interface Reminder {
 export interface OperationLog {
   id: number
   action: string
+  actionLabel: string
+  targetLabel: string
   targetType: string
   targetId: number | null
   detail: string | null

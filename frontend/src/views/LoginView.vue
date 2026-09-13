@@ -26,8 +26,9 @@ async function login() {
 
 <template>
   <section class="login-card">
-    <p class="eyebrow">妙海聚 · 自托管社区版</p>
-    <h1>把客户资料和下一次跟进，真正留在自己的系统里</h1>
+    <p class="eyebrow">妙海聚 · 跨行业关系维护</p>
+    <h1>记住每一段关系，接好下一次联系</h1>
+    <p class="muted">适用于保险、银行、地产、企业服务等行业的基础客户与合作关系维护，不以零售消费为前提。</p>
     <p class="muted">管理员密码由部署者通过环境变量设置，系统没有默认生产密码。</p>
     <form class="form-stack" @submit.prevent="login">
       <label>管理员账号<input v-model="form.username" autocomplete="username" required /></label>

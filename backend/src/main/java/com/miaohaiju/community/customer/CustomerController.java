@@ -34,8 +34,10 @@ public class CustomerController {
     }
 
     @GetMapping
-    ApiResponse<List<CustomerView>> list(@RequestParam(defaultValue = "") String keyword) {
-        return ApiResponse.ok(service.list(keyword));
+    ApiResponse<List<CustomerView>> list(@RequestParam(defaultValue = "") String keyword,
+                                         @RequestParam(defaultValue = "") String industry,
+                                         @RequestParam(defaultValue = "") String stage) {
+        return ApiResponse.ok(service.list(keyword, industry, stage));
     }
 
     @GetMapping("/{id}")

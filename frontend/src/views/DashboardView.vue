@@ -28,16 +28,16 @@ onMounted(load)
 
 <template>
   <section class="page-heading">
-    <div><p class="eyebrow">今天先处理什么</p><h1>经营概览</h1></div>
+    <div><p class="eyebrow">把每一次联系接起来</p><h1>关系概览</h1></div>
     <button class="secondary" type="button" @click="load">刷新</button>
   </section>
   <p v-if="loading" class="state">正在加载真实数据…</p>
   <p v-else-if="error" class="message error">{{ error }} <button class="text-button" @click="load">重试</button></p>
   <template v-else-if="overview">
     <section class="metric-grid">
-      <article><span>客户总数</span><strong>{{ overview.customerCount }}</strong><small>已保存客户档案</small></article>
+      <article><span>关系档案</span><strong>{{ overview.customerCount }}</strong><small>各行业个人与机构</small></article>
       <article><span>到期跟进</span><strong>{{ overview.dueFollowUps }}</strong><small>需要尽快处理</small></article>
-      <article><span>累计消费</span><strong>¥{{ Number(overview.totalConsumption).toFixed(2) }}</strong><small>真实消费记录汇总</small></article>
+      <article><span>已安排联系</span><strong>{{ overview.plannedFollowUps }}</strong><small>已有下一次时间，尚未到期</small></article>
     </section>
     <section class="panel">
       <div class="section-title"><div><p class="eyebrow">下一步</p><h2>到期跟进</h2></div><RouterLink to="/customers">查看客户</RouterLink></div>
@@ -49,5 +49,10 @@ onMounted(load)
         </RouterLink>
       </div>
     </section>
+    <details class="panel">
+      <summary>可选：消费汇总</summary>
+      <p>累计已记录消费：¥{{ Number(overview.totalConsumption).toFixed(2) }}</p>
+      <p class="field-hint">仅为已有消费记录求和，不代表保额、授信、资产规模或房产成交额；关系维护不以消费为前提。</p>
+    </details>
   </template>
 </template>

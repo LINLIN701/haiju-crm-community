@@ -1,6 +1,6 @@
 # 部署教程
 
-适用版本：社区版 V1.00.02；业务操作也适用于 V1.00.01。本文使用 Docker Compose 部署前端、后端和独立 MySQL 8.4。只运行 Docker 版时，不需要在宿主机另外安装 Java、Node.js 或 MySQL。
+适用版本：社区版 V1.01.01，包含V2跨行业关系字段迁移。本文使用 Docker Compose 部署前端、后端和独立 MySQL 8.4。只运行 Docker 版时，不需要在宿主机另外安装 Java、Node.js 或 MySQL。
 
 [返回首页](../README.md) · [使用教程](USER_GUIDE.md) · [常见问题](#常见问题)
 
@@ -25,7 +25,7 @@ docker info
 ## 2. 下载指定版本
 
 ```console
-git clone --branch V1.00.02 --depth 1 https://github.com/LINLIN701/haiju-crm-community.git
+git clone --branch V1.01.01 --depth 1 https://github.com/LINLIN701/haiju-crm-community.git
 cd haiju-crm-community
 ```
 
@@ -212,19 +212,21 @@ docker compose -p haiju-restore down -v
 
 升级前备份数据库、保存当前 `.env` 和部署中修改过的端口配置，记录当前Git提交与Compose项目名，阅读目标版本发布说明。先在独立环境验证新版本。
 
-Git安装可以获取标签后切换指定版本，例如从V1.00.01升级到本教程版本：
+Git安装可以获取标签后切换指定版本，例如从V1.00.02升级到本教程版本。V2会给既有客户追加行业和关系字段，先备份再执行；不连接其他业务系统数据库：
 
 ```console
 git fetch origin --tags
 git status --short
-git switch --detach V1.00.02
+git switch --detach V1.01.01
 docker compose -p haiju up -d --build
 docker compose -p haiju ps
 ```
 
 遇到本地文件冲突先保留自己的配置再处理，不使用强制重置。ZIP安装建议解压到新目录、复制受保护的配置，并沿用原Compose项目名；别让目录名变化创建一套空数据卷。
 
-V1.00.02只新增教程、截图和版本标识，没有新数据库迁移；可切回V1.00.01标签并重建应用进行代码回退。未来版本若含迁移，不能默认旧代码兼容新库，应按对应版本方案恢复到新环境。升级后验证登录、客户详情、跟进、消费、概览和日志，不只检查首页是否打开。
+V1.01.01包含V2迁移：旧客户默认“通用关系维护/未分类/未标注”，不擅自推断行业或关系状态；旧跟进、消费和日志保留。升级后验证登录、客户关系字段、行业/阶段筛选、CSV、跟进、可选消费、关系概览和中文日志。
+
+**V2数据库不能直接配合V1.00.02代码回退**。若需撤回升级，先停写并保存当前数据，再在独立空环境恢复迁移前备份，用旧版本验证后切换入口；升级后的新记录需要另行核对，不能因回退丢弃。不要修改或删除Flyway历史记录，也不要在生产卷上试验恢复。
 
 ## 常见问题
 

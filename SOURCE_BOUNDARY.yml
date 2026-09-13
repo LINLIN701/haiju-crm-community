@@ -1,13 +1,15 @@
 project: haiju-crm-community
 display_name: 海聚客户管理系统社区版
 company_brand: 妙海聚
-version: V1.00.02
+version: V1.01.01
 license: AGPL-3.0-or-later
 publication_status: source_published
-published_at: 2026-09-11
+published_at: 2026-09-13
 
 included_capabilities:
   - customer_profiles
+  - cross_industry_relationship_profiles_and_filters
+  - chinese_operation_log_display
   - customer_tags_and_search
   - customer_import_export
   - basic_contact_records_and_plans
@@ -16,6 +18,10 @@ included_capabilities:
   - basic_notifications_and_operation_logs
 
 excluded_capabilities:
+  - insurance_underwriting_and_claims
+  - banking_credit_payment_and_suitability
+  - real_estate_inventory_and_contract_transactions
+  - organization_relationship_graph
   - membership_commercial_workflows
   - performance_chains
   - multi_store_team_execution
